@@ -9,6 +9,8 @@
  * who       when        what
  * --------  ----------  ----------------------------------------------
  * rbolano   2004/03/14  created
+ * rtobar    2007/07/02  adapting to work with Celestron Nexstar 4 SE
+ *                       (CSAT Project)
  */
 
 #ifndef _SERIALPORT_RS232_H_
