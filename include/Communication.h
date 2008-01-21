@@ -10,13 +10,12 @@ class Communication{
 	public:
 		Communication(char *deviceName);
 		~Communication();
+		void initializeTelescope();
+		void getAltitude();
+		void getDeclination();
+		void getRA();
+		void getSiderealTime();
+		void getTrackingRate();
+		void getAzimuth();
 
-	void initializeTelescope()
-	void getAltitude()
-	void getDeclination()
-	void getRA()
-	void getSiderealTime()
-	void getTrackingRate()
-	void getAzimuth()
-
-}
+};

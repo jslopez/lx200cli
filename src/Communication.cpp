@@ -3,9 +3,9 @@
 
 #include "Communication.h"
 
-Communication::Communication(char deviceName)
+Communication::Communication(char *deviceName)
 {
-	this->sp = new SerialRS232(devinceName);
+	this->sp = new SerialRS232(deviceName);
 	this->sp->flush_RS232();
 }
 
@@ -19,7 +19,7 @@ void Communication::initializeTelescope()
 	this->sp->write_RS232(":I#", 3);
 }
 
-char Communication::getAltitude()
+void Communication::getAltitude()
 {
 	char *msg;
 
@@ -29,7 +29,7 @@ char Communication::getAltitude()
 	printf("%s", msg);
 }
 
-char Communication::getDeclination()
+void Communication::getDeclination()
 {
 	char *msg;
 
@@ -39,7 +39,7 @@ char Communication::getDeclination()
 	printf("%s", msg);
 }
 
-char Communication::getRA()
+void Communication::getRA()
 {
 	char *msg;
 
@@ -49,7 +49,7 @@ char Communication::getRA()
 	printf("%s", msg);
 }
 
-char Communication::getSiderealTime()
+void Communication::getSiderealTime()
 {
 	char *msg;
 
@@ -59,7 +59,7 @@ char Communication::getSiderealTime()
 	printf("%s", msg);
 }
 
-char Communication::getTrackingRate()
+void Communication::getTrackingRate()
 {
 	char *msg;
 
@@ -69,7 +69,7 @@ char Communication::getTrackingRate()
 	printf("%s", msg);
 }
 
-char Communication::getAzimuth()
+void Communication::getAzimuth()
 {
 	char *msg;
 
