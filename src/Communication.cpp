@@ -5,7 +5,7 @@
 
 Communication::Communication(char *deviceName)
 {
-        this->sp = new SerialRS232(deviceName);
+	this->sp = new SerialRS232(deviceName);
         this->sp->flush_RS232();
 }
 
