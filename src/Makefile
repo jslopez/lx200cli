@@ -31,12 +31,16 @@ doc: $(wildcard *.cpp) $(wildcard *.h)
 	@cd $(DOCDIR) && doxygen Doxyfile &> /dev/null
 
 clean:
-	cd $(BINDIR) && rm -f $(CLI_EXE)
-	cd $(OBJDIR) && rm -f $(OBJ) $(CLI_OBJ)
+	if test -d $(BINDIR) ; then\
+		cd $(BINDIR) && rm -f $(CLI_EXE);\
+	fi
+	if test -d $(OBJDIR) ; then\
+		cd $(OBJDIR) && rm -f $(OBJ) $(CLI_OBJ);\
+	fi
 
 distclean: clean
 	rm -rf $(DOCDIR)/html
-	rmdir $(BINDIR)
-	rmdir $(OBJDIR)
+	if test -d $(BINDIR); then rmdir $(BINDIR); fi
+	if test -d $(OBJDIR); then rmdir $(OBJDIR); fi
 	
 .PHONY: dirs clean

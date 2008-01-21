@@ -26,7 +26,6 @@ void leave(int);
 int main(int args, char *argv[])
 {
     char serialPort[NAME_MAX];
-    exit(EXIT_SUCCESS);
 
     printf("Using default port %s.\n", DEFAULT_PORT);
     strcpy(serialPort, DEFAULT_PORT);
