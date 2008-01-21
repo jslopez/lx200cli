@@ -1,9 +1,20 @@
 /**
  * \mainpage Meade LX200 GPS client
+ * \section intro_sec Introduction
+ * cli_lx200 is a Meade LX200 GPS telescope client. It implements the 
+ * <a href="http://www.meade.com/support/LX200CommandSet.pdf">Meade
+ * Telescope Serial Command Protocol</a> (revision L, 9 Octuber 2002) by using
+ * the serial port interface. The idea is the same that was used in the
+ * development of cli_nex4: 
+ * <a href="https://csrg.inf.utfsm.cl/twiki4/bin/view/ACS/NexstarClient">
+ * NexstarClient</a>, which is to probe the communication of the telescope and 
+ * the PC through the serial RS232 port.
+ *
  */
 
 /**
- * \file main.cpp
+ * \file client.cpp
+ * Main routine implementation.
  * \author Joao Lopez <jslopez@csrg.inf.utfsm.cl>
  */
 
@@ -21,8 +32,19 @@
 /** Communication object */
 Communication *com = NULL;
 
-void leave(int);
+/**
+ * Leaves the program at the SIGINT signal
+ * @param sig The signal received
+ */ 
+void leave(int sig);
 
+/**
+ * Main routine. Starts the communication through the default serial port.
+ * @param args number of command-line arguments passed.
+ * @param argv command-line arguments values passed.
+ * @returns EXIT_SUCCESS on successful termination or EXIT_FAILURE on
+ * unsuccessful termination.
+ */
 int main(int args, char *argv[])
 {
 	char serialPort[NAME_MAX];

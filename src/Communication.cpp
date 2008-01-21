@@ -1,3 +1,12 @@
+/**
+ * \file Communication.cpp
+ *
+ * Implements the communication with the Meade LX200 GPS telescope.
+ * The communication with the device itself is done by the SerialRS232 class.
+ *
+ * \author Joao Lopez <jslopez@csrg.inf.utfsm.cl>
+ */
+
 #include <stdio.h>
 #include <string.h>
 
@@ -14,11 +23,13 @@ Communication::~Communication()
         delete this->sp;
 }
 
+/** Initialize telescope command */
 void Communication::initializeTelescope()
 {
         this->sp->write_RS232(":I#", 3);
 }
 
+/** Get Telescope Altitude */
 void Communication::getAltitude()
 {
         char *msg;
@@ -29,6 +40,7 @@ void Communication::getAltitude()
         printf("%s\n", msg);
 }
 
+/** Get Telescope Declination */
 void Communication::getDeclination()
 {
         char *msg;
@@ -39,6 +51,7 @@ void Communication::getDeclination()
         printf("%s\n", msg);
 }
 
+/** Get Telescope RA */
 void Communication::getRA()
 {
         char *msg;
@@ -49,6 +62,7 @@ void Communication::getRA()
         printf("%s\n", msg);
 }
 
+/** Get the Sidereal Time */
 void Communication::getSiderealTime()
 {
         char *msg;
@@ -59,6 +73,7 @@ void Communication::getSiderealTime()
         printf("%s\n", msg);
 }
 
+/** Get tracking rate */
 void Communication::getTrackingRate()
 {
         char *msg;
@@ -69,6 +84,7 @@ void Communication::getTrackingRate()
         printf("%s\n", msg);
 }
 
+/** Get Telescope Azimuth */
 void Communication::getAzimuth()
 {
         char *msg;
