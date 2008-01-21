@@ -27,6 +27,18 @@ int main(int args, char *argv[])
 {
     char serialPort[NAME_MAX];
 
+    if(args < 2){
+	    printf("\nUsage: %s [option]\n\n", argv[0]);
+	    printf("Options availables:\n");
+	    printf("\tgalt\t(Get Altitude)\n");
+	    printf("\tgdec\t(Get Declination)\n");
+	    printf("\tgra\t(Get RA)\n");
+	    printf("\tgazi\t(Get Azimuth)\n");
+	    printf("\tgstime\t(Get Sidereal Time)\n");
+	    printf("\tgtrack\t(Get Tracking Rate)\n\n");
+	    exit(EXIT_FAILURE);
+    }
+
     printf("Using default port %s.\n", DEFAULT_PORT);
     strcpy(serialPort, DEFAULT_PORT);
 
@@ -38,6 +50,14 @@ int main(int args, char *argv[])
 	com->getAltitude();
     else if (!strcmp("gdec", argv[1]))
 	com->getDeclination();
+    else if (!strcmp("gra", argv[1]))
+	com->getRA();
+    else if (!strcmp("gazi", argv[1]))
+	com->getAzimuth();
+    else if (!strcmp("gstime", argv[1]))
+	com->getSiderealTime();
+    else if (!strcmp("gtrack", argv[1]))
+	com->getTrackingRate();
     else {
 	printf("No such option.\n");
 	exit(EXIT_FAILURE);
