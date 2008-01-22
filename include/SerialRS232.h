@@ -11,6 +11,13 @@
  * rbolano   2004/03/14  created
  * rtobar    2007/07/02  adapting to work with Celestron Nexstar 4 SE
  *                       (CSAT Project)
+ * jslopez   2007/01/14  adapting to work with Meade LX200 GPS
+ * 			 (CSAT Project deployment at PUC Observatory)
+ */
+
+/** 
+ * \file SerialRS232.h
+ * Headers of the SerialRS232 class
  */
 
 #ifndef _SERIALPORT_RS232_H_
@@ -20,6 +27,9 @@
 #include <sys/ioctl.h>
 using namespace std;
 
+/** 
+ * Class that handles all the serial port interactions
+ */
 class SerialRS232
 {
 public:

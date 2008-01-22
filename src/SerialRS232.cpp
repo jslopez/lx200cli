@@ -15,6 +15,9 @@
  *                       (CSAT Project deployment at PUC Observatory)
  */
 
+/** \file SerialRS232.cpp
+ * Facilities for read/write from/to a RS232 port on Linux.
+ */ 
 #include "SerialRS232.h"
 
 #include <cstring>
