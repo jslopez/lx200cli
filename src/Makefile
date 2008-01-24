@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-Wall -O2 -ggdb
 
-OBJ=SerialRS232.o Communication.o
+OBJ=SerialRS232.o Communication.o convertions.o
 CLI_EXE=cli_lx200
 CLI_OBJ=client.o
 

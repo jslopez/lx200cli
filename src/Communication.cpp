@@ -34,8 +34,8 @@ void Communication::getAltitude()
 
         this->sp->write_RS232(":GA#", 4);
         msg = this->sp->read_RS232();
-
-        printf("%s\n", msg);
+	
+	printf("%f\n", sexa2double(msg));
 }
 
 void Communication::getDeclination()
@@ -45,7 +45,7 @@ void Communication::getDeclination()
         this->sp->write_RS232(":GD#", 4);
         msg = this->sp->read_RS232();
 
-        printf("%s\n", msg);
+	printf("%f\n", sexa2double(msg));
 }
 
 void Communication::getRA()
