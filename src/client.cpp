@@ -10,6 +10,24 @@
  * NexstarClient</a>, which is to probe the communication of the telescope and 
  * the PC through the serial RS232 port.
  *
+ * \section usage-sec Usage
+ * 
+ * To use the client got the \c src directory and run \c make, this will let
+ * the \c cli_lx200 executable file at the \c bin directory.
+ * 
+ * <center> ./cli_lx200 option [value] </center>
+ *
+ * <center>
+ * <table>
+ * <tr><td><b>Option</b><td><b>Function</b></td><td><b>Value</b></td></tr>
+ * <tr><td>galt</td><td>(Get Altitude)<br/></td><td>-</td></tr>
+ * <tr><td>gazi</td><td>(Get Azimuth)<br/></td><td>-</td></tr>
+ * <tr><td>gstime</td><td>(Get Sidereal Time)<br/></td><td>-</td></tr>
+ * <tr><td>slew</td><td>(Move telescope in given direction)<br/></td>
+ * <td>{n, s, e, w}</td></tr>
+ * <tr><td>halt</td><td>(Halt all current slewing)<br/></td><td>-</td></tr>
+ * </table>
+ * </center>
  */
 
 /**
