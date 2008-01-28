@@ -1,6 +1,6 @@
 /** 
- * \file convertions.h
- * Headers for convertions operations.
+ * \file conversions.h
+ * Headers for conversions operations.
  *
  * \author Joao Lopez <jslopez@csrg.inf.utfsm.cl>
  */

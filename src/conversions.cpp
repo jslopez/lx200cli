@@ -1,11 +1,11 @@
 /** 
- * \file convertions.cpp
+ * \file conversions.cpp
  * 
  * Converts values received to values that allows mathematical operations.
  * 
  * \author Joao Lopez <jslopez@csrg.inf.utfsm.cl>
  */
-#include "convertions.h"
+#include "conversions.h"
 
 double sexa2double(const char *sexaStr)
 {

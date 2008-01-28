@@ -6,7 +6,7 @@
  */
 
 #include <SerialRS232.h>
-#include <convertions.h>
+#include <conversions.h>
 
 using namespace std;
 
