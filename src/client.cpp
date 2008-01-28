@@ -48,16 +48,15 @@ void leave(int sig);
 int main(int args, char *argv[])
 {
 	char serialPort[NAME_MAX];
+	int time[3];
 
 	if(args < 2){
-		printf("\nUsage: %s [option]\n\n", argv[0]);
+		printf("\nUsage: %s option [value]\n\n", argv[0]);
 		printf("Options availables:\n");
 		printf("\tgalt\t(Get Altitude)\n");
-		printf("\tgdec\t(Get Declination)\n");
-		printf("\tgra\t(Get RA)\n");
 		printf("\tgazi\t(Get Azimuth)\n");
 		printf("\tgstime\t(Get Sidereal Time)\n");
-		printf("\tgtrack\t(Get Tracking Rate)\n\n");
+		printf("\thalt\t(Halt all current slewing)\n\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -69,17 +68,18 @@ int main(int args, char *argv[])
 	signal(SIGINT, leave);
 
 	if (!strcmp("galt", argv[1]))
-		com->getAltitude();
-	else if (!strcmp("gdec", argv[1]))
-		com->getDeclination();
-	else if (!strcmp("gra", argv[1]))
-		com->getRA();
+		printf("\nActual altitude: %lf\n\n", com->getAltitude());
 	else if (!strcmp("gazi", argv[1]))
-		com->getAzimuth();
-	else if (!strcmp("gstime", argv[1]))
-		com->getSiderealTime();
-	else if (!strcmp("gtrack", argv[1]))
-		com->getTrackingRate();
+		printf("\nActual azimuth: %lf\n\n", com->getAzimuth());
+	else if (!strcmp("gstime", argv[1])) {
+		com->getSiderealTime(time);
+		printf("\nSidereal time: "); 
+		printf("%02d:%02d:%02d\n\n", time[0], time[1], time[2]);
+	}
+	else if (!strcmp("halt", argv[1])) {
+		printf("\nCurrent slewing halted\n\n");
+		com->haltSlewing();
+	}
 	else {
 		printf("No such option.\n");
 		exit(EXIT_FAILURE);

@@ -20,7 +20,8 @@ class Communication{
 
 	public:
 		/** 
-		 * Constructor 
+		 * Constructor
+		 * Set AltAz alignment mode. 
 		 * @param deviceName The serial port device
 		 */
 		Communication(char *deviceName);
@@ -28,25 +29,18 @@ class Communication{
 		/** Destructor */
 		~Communication();
 
-		/** Initialize telescope command */
-		void initializeTelescope();
-
 		/** Get Telescope Altitude */
-		void getAltitude();
-
-		/** Get Telescope Declination */
-		void getDeclination();
-
-		/** Get Telescope RA */
-		void getRA();
-
-		/** Get the Sidereal Time */
-		void getSiderealTime();
-
-		/** Get tracking rate */
-		void getTrackingRate();
+		double getAltitude();
 
 		/** Get Telescope Azimuth */
-		void getAzimuth();
+		double getAzimuth();
 
+		/** 
+		 * Get the Sidereal Time 
+		 * @param *stime Array for time values (HH:MM:SS)
+		 */
+		void getSiderealTime(int *stime);
+	
+		/** Halt all current slewing */
+		void haltSlewing();
 };

@@ -16,23 +16,12 @@ double sexa2double(const char *sexaStr)
 
         strncpy (str, sexaStr, sizeof(str)-1);
         str[sizeof(str)-1] = '\0';
-
-	//
-	printf("%s\n", sexaStr);
-
         sign = strchr(str, '-');
         if (sign)
             *sign = ' ';
 
         sscanf (str, "%lf%*[^0-9]%lf%*[^0-9]%lf", &x, &y, &z);
-	//
-	printf("\t%f : \t%f : \t%f\n", x, y, z);
-
-	//
-	printf("converted: %f\n", converted);
         converted = x + y/60 + z/3600;
-	//
-	printf("converted: %f\n", converted);
 
         if (sign)
             converted *= -1;
