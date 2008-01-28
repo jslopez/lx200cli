@@ -29,6 +29,7 @@ $(CLI_EXE): $(OBJ) $(CLI_OBJ)
 doc: $(wildcard *.cpp) $(wildcard *.h)
 	@echo Making doc...
 	@cd $(DOCDIR) && doxygen Doxyfile &> /dev/null
+	@cd $(DOCDIR)/latex && make &> /dev/null
 
 clean:
 	if test -d $(BINDIR) ; then\
@@ -40,6 +41,7 @@ clean:
 
 distclean: clean
 	rm -rf $(DOCDIR)/html
+	rm -rf $(DOCDIR)/latex
 	if test -d $(BINDIR); then rmdir $(BINDIR); fi
 	if test -d $(OBJDIR); then rmdir $(OBJDIR); fi
 	
