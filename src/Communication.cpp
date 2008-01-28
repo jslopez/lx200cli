@@ -53,6 +53,30 @@ void Communication::getSiderealTime(int *stime)
 	sscanf(msg, "%d:%d:%d#", &stime[0], &stime[1], &stime[2]);
 }
 
+bool Communication::slew(char direction)
+{
+	switch (direction) {
+		case 'n':
+		case 'N':
+			this->sp->write_RS232(":Mn#", 4);
+			return true;
+		case 's':
+		case 'S':
+			this->sp->write_RS232(":Ms#", 4);
+			return true;
+		case 'e':
+		case 'E':
+			this->sp->write_RS232(":Me#", 4);
+			return true;
+		case 'w':
+		case 'W':
+			this->sp->write_RS232(":Mw#", 4);
+			return true;
+		default:
+			return false;
+	}
+}
+
 void Communication::haltSlewing()
 {
 	this->sp->write_RS232(":Q#", 3);

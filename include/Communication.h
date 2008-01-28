@@ -41,6 +41,13 @@ class Communication{
 		 */
 		void getSiderealTime(int *stime);
 	
+		/**
+		 * Slew in received direction
+		 * @param direction n(north), s(south), w(west), e(east)
+		 * @returns true for right format direction and false for wrong
+		 */
+		bool slew(char direction);
+
 		/** Halt all current slewing */
 		void haltSlewing();
 };

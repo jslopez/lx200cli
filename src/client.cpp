@@ -53,9 +53,15 @@ int main(int args, char *argv[])
 	if(args < 2){
 		printf("\nUsage: %s option [value]\n\n", argv[0]);
 		printf("Options availables:\n");
-		printf("\tgalt\t(Get Altitude)\n");
-		printf("\tgazi\t(Get Azimuth)\n");
-		printf("\tgstime\t(Get Sidereal Time)\n");
+		printf("\tgalt\t\t(Get Altitude)\n");
+		printf("\tgazi\t\t(Get Azimuth)\n");
+		printf("\tgstime\t\t(Get Sidereal Time)\n");
+		printf("\tslew [value]\t(Move telescope in given direction)\n");
+		printf("\t\tValues availables:\n");
+		printf("\t\t\tn (North)\n");
+		printf("\t\t\ts (South)\n");
+		printf("\t\t\te (East)\n");
+		printf("\t\t\tw (West)\n");
 		printf("\thalt\t(Halt all current slewing)\n\n");
 		exit(EXIT_FAILURE);
 	}
@@ -75,6 +81,12 @@ int main(int args, char *argv[])
 		com->getSiderealTime(time);
 		printf("\nSidereal time: "); 
 		printf("%02d:%02d:%02d\n\n", time[0], time[1], time[2]);
+	}
+	else if (!strcmp("slew", argv[1]) && args > 2) {
+		if(com->slew(argv[2][0]))
+			printf("\nMoving %c\n\n", argv[2][0]);
+		else
+			printf("\nWrong input\n\n");
 	}
 	else if (!strcmp("halt", argv[1])) {
 		printf("\nCurrent slewing halted\n\n");
