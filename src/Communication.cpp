@@ -81,3 +81,8 @@ void Communication::haltSlewing()
 {
 	this->sp->write_RS232(":Q#", 3);
 }
+
+bool Communication::goToAltAz(double alt, double azm)
+{
+	return true;
+}

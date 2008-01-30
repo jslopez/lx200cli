@@ -48,6 +48,15 @@ class Communication{
 		 */
 		bool slew(char direction);
 
+		/**
+		 * Go to Alt/Az coordinates
+		 * @param alt Altitude
+		 * @param azm Azimuth
+		 * @returns true for right coordinates format and false for
+		 * wrong
+		 */
+		bool goToAltAz(double alt, double azm);
+
 		/** Halt all current slewing */
 		void haltSlewing();
 };

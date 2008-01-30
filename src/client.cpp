@@ -80,6 +80,7 @@ int main(int args, char *argv[])
 		printf("\t\t\ts (South)\n");
 		printf("\t\t\te (East)\n");
 		printf("\t\t\tw (West)\n");
+		printf("\tgtalaz\t\t(Go to Altitude Azimuth coordinates)\n");
 		printf("\thalt\t(Halt all current slewing)\n\n");
 		exit(EXIT_FAILURE);
 	}
@@ -104,6 +105,14 @@ int main(int args, char *argv[])
 		if(com->slew(argv[2][0]))
 			printf("\nMoving %c\n\n", argv[2][0]);
 		else
+			printf("\nWrong input\n\n");
+	}
+	else if (!strcmp("gtalaz", argv[1]) && args > 3) {
+		if(com->goToAltAz(argv[2][0], argv[2][0])) {
+
+			printf("\nMoving to ");
+			printf("%f,%f\n\n", atof(argv[2]), atof(argv[2]));
+		} else
 			printf("\nWrong input\n\n");
 	}
 	else if (!strcmp("halt", argv[1])) {
