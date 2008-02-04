@@ -71,8 +71,11 @@ int main(int args, char *argv[])
 	if(args < 2){
 		printf("\nUsage: %s option [value]\n\n", argv[0]);
 		printf("Options availables:\n");
+		printf("\tgall\t\t(Get all the information)\n");
 		printf("\tgalt\t\t(Get Altitude)\n");
 		printf("\tgazi\t\t(Get Azimuth)\n");
+		printf("\tgdec\t\t(Get Declination)\n");
+		printf("\tgra\t\t(Get RA)\n");
 		printf("\tgstime\t\t(Get Sidereal Time)\n");
 		printf("\tslew [value]\t(Move telescope in given direction)\n");
 		printf("\t\tValues availables:\n");
@@ -80,7 +83,11 @@ int main(int args, char *argv[])
 		printf("\t\t\ts (South)\n");
 		printf("\t\t\te (East)\n");
 		printf("\t\t\tw (West)\n");
-		printf("\tgtalaz\t\t(Go to Altitude Azimuth coordinates)\n");
+		printf("\tgtradec [value] [value]");
+		printf("\t(Go to RA/Dec coordinates)\n");
+		printf("\t\tValues format:\n");
+		printf("\t\t\tHH:MM:SS (Right ascension)\n");
+		printf("\t\t\tsDD:MM:SS (Declination)\n");
 		printf("\thalt\t(Halt all current slewing)\n\n");
 		exit(EXIT_FAILURE);
 	}
@@ -92,10 +99,33 @@ int main(int args, char *argv[])
 
 	signal(SIGINT, leave);
 
-	if (!strcmp("galt", argv[1]))
+	if (!strcmp("gall", argv[1])) {
+		printf("\nActual altitude: %lf", com->getAltitude());
+		printf("\nActual azimuth: %lf", com->getAzimuth());
+		com->getDeclination(time);
+		printf("\nActual declination: ");
+		printf("%02d:%02d:%02d", time[0], time[1], time[2]);
+		com->getRA(time);
+		printf("\nActual right ascension: ");
+		printf("%02d:%02d:%02d", time[0], time[1], time[2]);
+		com->getSiderealTime(time);
+		printf("\nSidereal time: "); 
+		printf("%02d:%02d:%02d\n\n", time[0], time[1], time[2]);
+	}
+	else if (!strcmp("galt", argv[1]))
 		printf("\nActual altitude: %lf\n\n", com->getAltitude());
 	else if (!strcmp("gazi", argv[1]))
 		printf("\nActual azimuth: %lf\n\n", com->getAzimuth());
+	else if (!strcmp("gdec", argv[1])) {
+		com->getDeclination(time);
+		printf("\nActual declination: ");
+		printf("%02d:%02d:%02d\n\n", time[0], time[1], time[2]);
+	}
+	else if (!strcmp("gra", argv[1])) {
+		com->getRA(time);
+		printf("\nActual right ascension: ");
+		printf("%02d:%02d:%02d\n\n", time[0], time[1], time[2]);
+	}
 	else if (!strcmp("gstime", argv[1])) {
 		com->getSiderealTime(time);
 		printf("\nSidereal time: "); 
@@ -107,11 +137,11 @@ int main(int args, char *argv[])
 		else
 			printf("\nWrong input\n\n");
 	}
-	else if (!strcmp("gtalaz", argv[1]) && args > 3) {
-		if(com->goToAltAz(argv[2][0], argv[2][0])) {
+	else if (!strcmp("gtradec", argv[1]) && args > 3) {
+		if(com->goToRADec(argv[2], argv[3])) {
 
 			printf("\nMoving to ");
-			printf("%f,%f\n\n", atof(argv[2]), atof(argv[2]));
+			printf("(%s, %s)\n\n", argv[2], argv[3]);
 		} else
 			printf("\nWrong input\n\n");
 	}

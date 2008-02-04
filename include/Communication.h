@@ -38,6 +38,12 @@ class Communication{
 		/** Get Telescope Azimuth */
 		double getAzimuth();
 
+		/** Get Telescope Declination */
+		void getDeclination(int *dec);
+
+		/** Get Telescope RA */
+		void getRA(int *ra);
+
 		/** 
 		 * Get the Sidereal Time 
 		 * @param *stime Array for time values (HH:MM:SS)
@@ -52,13 +58,13 @@ class Communication{
 		bool slew(char direction);
 
 		/**
-		 * Go to Alt/Az coordinates
-		 * @param alt Altitude
-		 * @param azm Azimuth
+		 * Go to RA/Dec coordinates
+		 * @param ra Right ascension
+		 * @param dec Declination
 		 * @returns true for right coordinates format and false for
 		 * wrong
 		 */
-		bool goToAltAz(double alt, double azm);
+		bool goToRADec(char *ra, char *dec);
 
 		/** Halt all current slewing */
 		void haltSlewing();

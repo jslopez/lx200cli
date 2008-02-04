@@ -44,6 +44,24 @@ double Communication::getAzimuth()
 	return sexa2double(msg);
 }
 
+void Communication::getDeclination(int *dec)
+{
+        char *msg;
+
+        this->sp->write_RS232(":GD#", 4);
+        msg = this->sp->read_RS232();
+	sscanf(msg, "%d%*[^0-9]%d%*[^0-9]%d#", &dec[0], &dec[1], &dec[2]);
+}
+
+void Communication::getRA(int *ra)
+{
+        char *msg;
+
+        this->sp->write_RS232(":GR#", 4);
+        msg = this->sp->read_RS232();
+	sscanf(msg, "%d:%d:%d#", &ra[0], &ra[1], &ra[2]);
+}
+
 void Communication::getSiderealTime(int *stime)
 {
         char *msg;
@@ -82,7 +100,54 @@ void Communication::haltSlewing()
 	this->sp->write_RS232(":Q#", 3);
 }
 
-bool Communication::goToAltAz(double alt, double azm)
+bool Communication::goToRADec(char *ra, char *dec)
 {
+	int x = 0, y = 0, z = 0;
+	char raCmd[12];
+	char decCmd[13];
+	char str[128];
+	char *sign;
+
+	/* Set ra
+	:SrHH:MM:SS#
+	returns 0 invalid
+	returns 1 invalid
+	*/
+	
+        strncpy (str, ra, sizeof(str)-1);
+	str[sizeof(str)-1] = '\0';
+        sscanf (str, "%d%*[^0-9]%d%*[^0-9]%d", &x, &y, &z);
+	sprintf(raCmd, ":Sr%02d:%02d:%02d#", x, y, z);
+
+	this->sp->write_RS232(raCmd, 12);
+
+	/* Set declination
+	:SdsDD*MM:SS#
+	returns 0 Dec invalid
+	returns 1 Dec accepted
+	*/	
+	
+        strncpy (str, dec, sizeof(str)-1);
+	str[sizeof(str)-1] = '\0';
+        sign = strchr(str, '-');
+        if (sign)
+		*sign = ' ';
+        sscanf (str, "%d%*[^0-9]%d%*[^0-9]%d", &x, &y, &z);
+	if (sign)
+		sprintf(decCmd, ":Sd-%02d*%02d:%02d#", x, y, z);
+	else
+		sprintf(decCmd, ":Sd+%02d*%02d:%02d#", x, y, z);
+
+	this->sp->write_RS232(decCmd, 13);
+
+	/* Go to target object
+	:MS#
+	returns 0 slew is possible
+	returns 1 below horizon
+	returns 2 below higher
+	*/
+	
+	this->sp->write_RS232(":MS#", 4);
+
 	return true;
 }
