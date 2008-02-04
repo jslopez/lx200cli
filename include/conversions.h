@@ -5,6 +5,9 @@
  * \author Joao Lopez <jslopez@csrg.inf.utfsm.cl>
  */
 
+#ifndef _CONVERSIONS_H_
+#define _CONVERSIONS_H_
+
 #include <stdio.h>
 #include <string.h>
 
@@ -14,3 +17,5 @@
  * @returns converted Value converted.
  */
 double sexa2double(const char *sexaStr);
+
+#endif

@@ -5,6 +5,9 @@
  * \author Joao Lopez <jslopez@csrg.inf.utfsm.cl>
  */
 
+#ifndef _COMMUNICATION_H_
+#define _COMMUNICATION_H_
+
 #include <SerialRS232.h>
 #include <conversions.h>
 
@@ -60,3 +63,5 @@ class Communication{
 		/** Halt all current slewing */
 		void haltSlewing();
 };
+
+#endif
