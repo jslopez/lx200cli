@@ -71,6 +71,7 @@ int main(int args, char *argv[])
 	if(args < 2){
 		printf("\nUsage: %s option [value]\n\n", argv[0]);
 		printf("Options availables:\n");
+		printf("\tcheck\t\t(Check telescope connection)\n");
 		printf("\tgall\t\t(Get all the information)\n");
 		printf("\tgalt\t\t(Get Altitude)\n");
 		printf("\tgazi\t\t(Get Azimuth)\n");
@@ -99,7 +100,9 @@ int main(int args, char *argv[])
 
 	signal(SIGINT, leave);
 
-	if (!strcmp("gall", argv[1])) {
+	if (!strcmp("check", argv[1])) 
+		printf("\nTelescope name: %s\n\n", com->checkConnection());
+	else if (!strcmp("gall", argv[1])) {
 		printf("\nActual altitude: %lf", com->getAltitude());
 		printf("\nActual azimuth: %lf", com->getAzimuth());
 		com->getDeclination(time);

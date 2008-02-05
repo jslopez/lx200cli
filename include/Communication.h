@@ -32,6 +32,8 @@ class Communication{
 		/** Destructor */
 		~Communication();
 
+		/** Check telescope connection */
+		char *checkConnection();
 		/** Get Telescope Altitude */
 		double getAltitude();
 

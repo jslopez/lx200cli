@@ -24,6 +24,12 @@ Communication::~Communication()
         delete this->sp;
 }
 
+char *Communication::checkConnection()
+{
+	this->sp->write_RS232(":GVP#", 5);
+	return(this->sp->read_RS232());
+}
+
 double Communication::getAltitude()
 {
         char *msg;
