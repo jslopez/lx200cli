@@ -14,9 +14,9 @@
 
 Communication::Communication(char *deviceName)
 {
-	this->sp = new SerialRS232(deviceName);
-        this->sp->write_RS232(":AA#", 4);
-        this->sp->flush_RS232();
+	this->sp = new SerialRS232(deviceName,80);
+	this->sp->write_RS232(":AA#", 4);
+	this->sp->flush_RS232();
 }
 
 Communication::~Communication()
@@ -26,7 +26,8 @@ Communication::~Communication()
 
 char *Communication::checkConnection()
 {
-	this->sp->write_RS232(":GVP#", 5);
+	char tmp[1]; tmp[0] = (char)0x06;
+	this->sp->write_RS232(tmp, 1);
 	return(this->sp->read_RS232());
 }
 

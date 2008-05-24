@@ -96,6 +96,7 @@ int main(int args, char *argv[])
 	printf("Using default port %s.\n", DEFAULT_PORT);
 	strcpy(serialPort, DEFAULT_PORT);
 
+	setbuf(stdout,NULL);
 	com = new Communication(serialPort);
 
 	signal(SIGINT, leave);
